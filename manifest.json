@@ -1,5 +1,5 @@
 {
-  "name": "Facebook Timeline Editor",
+  "name": "Facebook Personal Post Editor",
   "description": "Build an Extension!",
   "version": "1.0",
   "manifest_version": 3,
@@ -10,19 +10,20 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "128": "/images/search128.png"
+      "128": "/images/Editor__128_org.png"
     }
   },
   "icons": {
-    "32": "/images/search32.png",
-    "48": "/images/search48.png",
-    "128": "/images/search128.png"
+    "32": "/images/Editor__1_org.png",
+    "48": "/images/Editor__48_org.png",
+    "128": "/images/Editor__128_org.png"
   },
   "host_permissions": ["*://*.facebook.com/*"],
   "content_scripts": [
     {
       
       "js": ["jquery-3.1.0.min.js", "arrive.js", "content.js"],
+      "css":["style.css"],
       "matches": ["*://*.facebook.com/*"],
       "run_at": "document_end"
     }
