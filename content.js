@@ -33,9 +33,8 @@ const textFormatOption = type => {
   console.log('here clicked')
   console.log('dfgdfg', selectedObj, selectedObj.toString())
   restoreSelection(selectedObj)
-  console.log('dan1', selectedObj, selectedObj.toString())
   if ($(`[aria-label="Post"]`).length) {
-    //get the selected tesxt and covert it to string
+    //get the selected text and covert it to string
     var stringSelected = document.getSelection().toString()
     var tempArray = [...stringSelected]
     if (stringSelected) {
@@ -44,7 +43,7 @@ const textFormatOption = type => {
       reformatedText = ''
       let p
       switch (type) {
-  //passing array ,character and type as function parameter & in return get the reformated character & concat them to reformatted string
+        //passing array ,character and type as function parameter & in return get the reformated character & concat them to reformatted string
         case 0:
           for (let i = 0; i < tempArray.length; i++) {
             reformatedText += normalToBold(
@@ -67,36 +66,34 @@ const textFormatOption = type => {
           }
           break
         case 3:
-       
-
           for (let i = 0; i < tempArray.length; i++) {
             reformatedText += normalTooutline(
               specialToNormal([...all_characters], tempArray[i], type)
             )
           }
-          break;
-          //passing the selected string and unicode of Combining Low Line(818) and in return get the underlined text
+          break
+        //passing the selected string and unicode of Combining Low Line(818) and in return get the underlined text
         case 4:
           reformatedText = strikethroughAndunderline(tempArray, 818)
-          break;
-          //passing string and unicode of 'COMBINING LONG STROKE OVERLAY'(822) as argument and get the strike through string as reformated text
+          break
+        //passing string and unicode of 'COMBINING LONG STROKE OVERLAY'(822) as argument and get the strike through string as reformated text
         case 5:
-          reformatedText =  strikethroughAndunderline(tempArray, 822)
-          break;
+          reformatedText = strikethroughAndunderline(tempArray, 822)
+          break
         case 6:
           for (let i = 0; i < tempArray.length; i++) {
             reformatedText += upperTosmall(
               specialToNormal([...all_characters], tempArray[i], type)
             )
           }
-          break;
+          break
         case 7:
           for (let i = 0; i < tempArray.length; i++) {
             reformatedText += smallToupper(
               specialToNormal([...all_characters], tempArray[i], type)
             )
           }
-          break;
+          break
 
         default:
           for (let i = 0; i < tempArray.length; i++) {
@@ -117,8 +114,8 @@ const textFormatOption = type => {
           'text/plain': blob
         })
       ]
-      
-//copy the  reformated text to clipboard
+
+      //copy the  reformated text to clipboard
       navigator.clipboard.write(cpData).then(
         function () {
           restoreSelection(selectedObj)
@@ -143,7 +140,7 @@ function specialToNormal (inputArray, element, type) {
   if (inputArray.includes(element)) {
     alpha_index = inputArray.indexOf(element)
     console.log(inputArray[alpha_index].codePointAt(0), 'rammoy')
-//for normal character,return that character itself
+    //for normal character,return that character itself
     if (alpha_index < 62) {
       alphabet = String.fromCodePoint(
         inputArray[alpha_index].codePointAt(0) - 0
@@ -223,7 +220,7 @@ function specialToNormal (inputArray, element, type) {
         inputArray[alpha_index].codePointAt(0) - diff
       )
       return alphabet
-     // converting outline character to normal character
+      // converting outline character to normal character
     } else if (alpha_index >= 228 && alpha_index < 254) {
       if (type === 3) {
         diff = 0
@@ -235,7 +232,6 @@ function specialToNormal (inputArray, element, type) {
       )
       return alphabet
     } else if (alpha_index >= 254 && alpha_index < 280) {
-      
       if (type === 3) {
         diff = 0
       } else {
@@ -253,8 +249,6 @@ function specialToNormal (inputArray, element, type) {
       } else {
         diff = 120744
       }
-      console.log('testing the inner')
-      console.log(String.fromCodePoint(inputArray[alpha_index].codePointAt(0)))
       alphabet = String.fromCodePoint(
         inputArray[alpha_index].codePointAt(0) - diff
       )
@@ -281,8 +275,7 @@ function normalToBold (norAlpha) {
       alphabet = String.fromCodePoint(norAlpha.codePointAt(0) + 120764)
       return alphabet
     }
-  } 
-  else {
+  } else {
     return specialToNormal([...all_characters], norAlpha, 9)
   }
 }
@@ -347,7 +340,7 @@ function normalTooutline (norAlpha) {
   }
 }
 // if charCode parameter comes as 818,it will do underline & in case 822 ,will do strikethrough
-function  strikethroughAndunderline (text, charCode) {
+function strikethroughAndunderline (text, charCode) {
   var iterator = 0
   while (iterator < text.length) {
     if (text[iterator] != String.fromCharCode(charCode)) {
@@ -382,18 +375,19 @@ function upperTosmall (norAlpha) {
   }
 }
 //converting small to upper
-function smallToupper(norAlpha){let alphabet = ''
-let alpha_index = ''
-if (normal_character_array.includes(norAlpha)) {
-  alpha_index = normal_character_array.indexOf(norAlpha)
+function smallToupper (norAlpha) {
+  let alphabet = ''
+  let alpha_index = ''
+  if (normal_character_array.includes(norAlpha)) {
+    alpha_index = normal_character_array.indexOf(norAlpha)
 
-  if (alpha_index >= 26 && alpha_index < 52) {
-    let alphabet = String.fromCodePoint(norAlpha.codePointAt(0) - 32)
-    return alphabet
-  } else {
-    return specialToNormal([...all_characters], norAlpha, 9)
+    if (alpha_index >= 26 && alpha_index < 52) {
+      let alphabet = String.fromCodePoint(norAlpha.codePointAt(0) - 32)
+      return alphabet
+    } else {
+      return specialToNormal([...all_characters], norAlpha, 9)
+    }
   }
-}
 }
 $(document).on('click', '.bold', () => {
   textFormatOption(0)
@@ -444,24 +438,24 @@ function restoreSelection (range) {
   }
 }
 //After releasing the mouse , onmouseup event will occur & if text selected, the toolbar will be visible
-var selectedObj = "";
-$(document).on("selectionchange", function (e) {
-  
+var selectedObj = ''
+$(document).on('selectionchange', function (e) {
   if ($(`[aria-label="Post"]`).length) {
-    document.onmouseup = function()
-    {
-      if(document.getSelection().toString().length !== 0 && document.getSelection().toString() !=" " )
-      {
-        document.getElementsByClassName("wrapper")[0].style.visibility = "visible";
-      }else {
-        document.getElementsByClassName("wrapper")[0].style.visibility = "hidden";
+    document.onmouseup = function () {
+      if (
+        document.getSelection().toString().length !== 0 &&
+        document.getSelection().toString() != ' '
+      ) {
+        document.getElementsByClassName('wrapper')[0].style.visibility =
+          'visible'
+      } else {
+        document.getElementsByClassName('wrapper')[0].style.visibility =
+          'hidden'
       }
     }
-    var stringSelected = window.getSelection().toString();
+    var stringSelected = window.getSelection().toString()
     if (stringSelected) {
-      selectedObj = saveSelection();
+      selectedObj = saveSelection()
     }
   }
-});
-
-
+})
