@@ -3,8 +3,9 @@
 Facebook is  one of the most used social media in today’s world .People do post emotional as well important statements over their. So ,when they do post this kind of statement from their personal profile, they feel the need of editor to prioritize  a particular word or to express their emotion in a more convenient way. This project is all about adding an editor to the personal profile timeline post.</br>
 Whenever user going to write some post on Facebook and open the create post popup ,some script will be injected to the facebook DOM . The script will allow to append a hidden toolbar inside that pop up box .Once user select a text, this toolbar will be visible which has button like bold, italic, cursive outline underline strikethrough small ,capital .All this features are explained in below-</br>
 ### **Bold**: 
-Pressing bold over a selected text, will convert normal character to bold. If  some character remains bold and some remains normal ,then selecting the whole text & pressing bold will lead the bold character to normal and normal to bold.
-Example- </br>
+Pressing bold over a selected text, will convert normal character to bold. If  some character remains bold and some remains normal ,then selecting the whole text & pressing bold will lead the bold character to normal and normal to bold.</br>
+#### **Example**
+* AB𝗖𝗗->𝗔𝗕CD
 ### *Italic*:
  it will make the selected text to italic. Like the bold , it will also make text Italic and nonItalic accordingly.</br>
 Like the Bold and Italic ,the other features like cursive , outline, strikethrough ,underline will change the character accordingly.</br>
@@ -22,9 +23,9 @@ Though combining multiple features is yet to implement, But strikethrough or und
 *	JQuery
 *	CSS
 ###  Getting Started
-    #### Prerequisite:
-        *Chrome browser
-      Installation:
+ #### Prerequisite:
+  * Chrome browser
+### Installation:
 ###	Github link: https://github.com/Rammoy123/FB_INJECT.git
 *   Download the zip folder  in your local machine using the above link
 *   Extract it and open chrome browser
